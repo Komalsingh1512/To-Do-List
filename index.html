@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,300;0,400;1,200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <ul id="ul">
+            <div id="heading">TO-DO LIST</div>
+            <img src="/image/icon-sun.svg">
+            <br>
+            <li id="entry">
+                <input type="text" id="title" placeholder="Title">
+                <input type="text" name="text" id="dtn" placeholder="Description" />
+                <h2 id="note"> Click Me<button type="submit" id="button">+</button></h2>
+            </li>
+        </ul>
+    </div>
+    <script>
+        // element selection
+        let ul = document.getElementById("ul");
+        let title = document.getElementById("title");
+        let dtn = document.getElementById("dtn");
+        let button = document.getElementById("button");
+        let chb = document.getElementsByClassName("checkbox");
+        chb.type = "checkbox";
+        let td, dd;
+
+        // getting data from the textbox and passing it to list function if the data is not empty
+        function onclick() {
+            td = title.value;
+            dd = dtn.value;
+            console.log(td);
+            if (td && dd) {
+                localStorage.setItem(td, dd);
+                location.reload();
+            }
+        }
+
+        // creates the contents of the list after reload of screen
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            const item = localStorage.getItem(key);
+            var li = document.createElement("li");
+            li.className += `${key}`;
+            ul.append(li);
+            li.innerHTML = ` <input type="radio" class="checkbox" name="" id="" onchange="remove(this)" />
+        <span>${key}</span><br>
+        <p>${item}</p>`;
+        }
+        // adding a event listener to the submit button for creating a new task item
+        button.addEventListener("click", onclick);
+
+        // removes the item from the list after checking the checkbox
+        function remove(e) {
+            e.parentElement.remove();
+            const li = e.parentElement;
+            var key = li.className;
+            window.localStorage.removeItem(key);
+        }
+    </script>
+</body>
+
+</html>
