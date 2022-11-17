@@ -19,7 +19,7 @@
             <li id="entry">
                 <input type="text" id="title" placeholder="Title">
                 <input type="text" name="text" id="dtn" placeholder="Description" />
-                <h2 id="note"> Click Me<button type="submit" id="button">+</button></h2>
+                <button type="submit" id="button">Click Me +</button>
             </li>
         </ul>
     </div>
@@ -51,7 +51,7 @@
             var li = document.createElement("li");
             li.className += `${key}`;
             ul.append(li);
-            li.innerHTML = ` <input type="radio" class="checkbox" name="" id="" onchange="remove(this)" />
+            li.innerHTML = ` <input type="checkbox" class="checkbox" name="" id="" onchange="remove(this)" />
         <span>${key}</span><br>
         <p>${item}</p>`;
         }
